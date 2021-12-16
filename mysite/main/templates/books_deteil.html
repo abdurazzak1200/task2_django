@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{{post.name}}{% endblock %}
+
+
+{% block content %}
+
+<!-- post share -->
+<div class="section-row">
+    <div class="post-share">
+        <a href="#" class="social-facebook"><i class="fa fa-facebook"></i><span>Share</span></a>
+        <a href="#" class="social-twitter"><i class="fa fa-twitter"></i><span>Tweet</span></a>
+        <a href="#" class="social-pinterest"><i class="fa fa-pinterest"></i><span>Pin</span></a>
+        <a href="#" ><i class="fa fa-envelope"></i><span>Email</span></a>
+    </div>
+</div>
+<!-- /post share -->
+
+<!-- post content -->
+<div class="section-row">
+
+    <img style="display: inline-block;width:40%" src="{{post.image.url}}" alt="">
+    <h3 style="display: inline-block; margin: 3rem" >{{post.name}}</h3>
+    <p >{{ post.descrip }}</p>
+    <h6>Жанр: {{post.category.name}}</h6>
+    <h6>Автор: {{post.author}}</h6>
+    <h6>Год выпуска: {{post.yaer}}</h6>
+    <h6>Дата добавления: {{post.created}}</h6>
+    <a style="background-color:#ee4266;color:#fff;padding: 8px 14px; border-radius:5%;" href="{{post.book_file.url}}">Скачать</a>
+
+
+</div>
+<!-- /post content -->
+<!-- post comments -->
+<div class="section-row">
+    <div class="post-comments">
+        <h2>Комментарии</h2>
+        <!-- comment -->
+        {% for comment in comments %}
+        <div class="media">
+            <div class="media-body">
+                <div class="media-heading">
+                    <h4>{{comment.name}}</h4>
+                    <span class="time">{{comment.created}}</span>
+                </div>
+                <p style="margin-top: 20px">{{comment.text}}.</p>
+                <a href="#" class="reply">Reply</a>
+
+            </div>
+        </div>
+        {% endfor %}
+        <!-- /comment -->
+
+    </div>
+</div>
+<!-- /post comments -->
+<div class="comment-form-wrap pt-5">
+    <h3 class="mb-5">Leave a comment</h3>
+    <form method="post" class="p-5 bg-light">
+        {% csrf_token %}
+        {{ form }}
+        <button style="margin-top:3rem" class="btn btn-primary" type="submit">Отправить</button>
+    </form>
+</div>
+<!-- post reply -->
+</div>
+{% endblock %}

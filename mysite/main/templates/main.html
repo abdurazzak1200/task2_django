@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<div class="col-md-12">
+    <div class="section-title">
+        <h2 class="title">Recent posts</h2>
+    </div>
+</div>
+<!-- post -->
+{% for post in posts %}
+<div style="height: 600px" class="col-md-6">
+    <div class="post">
+        <a class="post-img" href="{% url 'book_detail' post.id %}"><img src="{{post.image.url}}" alt=""></a>
+        <div class="post-body">
+            <div class="post-category">
+                <a href="{% url 'genre_detail' post.category.id %}">{{post.category.name}}</a>
+            </div>
+            <h3 class="post-title"><a href="{% url 'book_detail' post.id %}">{{post.name}}</a></h3>
+            <ul class="post-meta">
+                <li><a href="author.html">{{post.author}}</a></li>
+                <li>{{post.created}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- /post -->
+
+</div>
+{% endblock %}
